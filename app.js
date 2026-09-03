@@ -314,6 +314,9 @@ function playSynthAudio(freqs, durationMs, onDone) {
             return;
         }
         if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
 
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
@@ -1001,6 +1004,96 @@ const CANDIDATE_PROJECTS = [
         gatiShaktiCoord: '23.3321° N, 86.3652° E',
         rationale: 'Fuses high student demographic concentration with 62% school laboratory deficit. BharatNet optic fiber integration included.',
         scheme: 'PM-SHRI & Samagra Shiksha Abhiyan'
+    },
+    {
+        rank: 10,
+        id: 'proj-10',
+        name: 'Bastar-Dantewada Solar Cold-Chain Primary Health Posts',
+        location: 'Bastar & Dantewada, Chhattisgarh',
+        ministry: 'health',
+        ministryName: 'MoHFW / PM-ABHIM',
+        pvi: 93.1,
+        cost: 42.0,
+        beneficiaries: '62,000 Tribals',
+        timeline: '10 Months',
+        gatiShaktiCoord: '18.8924° N, 81.3512° E',
+        rationale: 'Protects critical vaccine cold-chain and emergency maternity centers across remote forest habitations vulnerable to grid failure.',
+        scheme: 'PM-JANMAN Health Mission'
+    },
+    {
+        rank: 11,
+        id: 'proj-11',
+        name: 'Raichur Krishna River Fluoride-Safe Piped Water Grid',
+        location: 'Raichur, Karnataka',
+        ministry: 'jal',
+        ministryName: 'Jal Shakti / JJM',
+        pvi: 92.5,
+        cost: 88.0,
+        beneficiaries: '210,000 Citizens',
+        timeline: '15 Months',
+        gatiShaktiCoord: '16.2076° N, 77.3463° E',
+        rationale: 'Supplies treated surface water to 84 severely fluorosis-affected villages, reducing skeletal disability rates by 82%.',
+        scheme: 'Jal Jeevan Mission Surface Water Tranche'
+    },
+    {
+        rank: 12,
+        id: 'proj-12',
+        name: 'Wayanad Hill-Corridor Geogrid Reinforced Anti-Landslide Pass',
+        location: 'Wayanad, Kerala',
+        ministry: 'morth',
+        ministryName: 'MoRTH / NDMA',
+        pvi: 90.8,
+        cost: 56.0,
+        beneficiaries: '45,000 Citizens',
+        timeline: '12 Months',
+        gatiShaktiCoord: '11.6854° N, 76.1320° E',
+        rationale: 'Bio-engineering soil nailing and geogrid retaining structures safeguarding critical plantation arteries from catastrophic slope failure.',
+        scheme: 'National Disaster Mitigation Fund'
+    },
+    {
+        rank: 13,
+        id: 'proj-13',
+        name: 'Baramulla Sub-Zero Armored Underground Fiber & Tele-ICU',
+        location: 'Baramulla, Jammu & Kashmir',
+        ministry: 'education',
+        ministryName: 'MeitY & Samagra Shiksha',
+        pvi: 89.6,
+        cost: 34.5,
+        beneficiaries: '38,000 Highland Citizens',
+        timeline: '10 Months',
+        gatiShaktiCoord: '34.2012° N, 74.3621° E',
+        rationale: 'Frost-resistant underground fiber backbone linking 14 high-altitude snowbound border hamlets to district hospital tele-ICU.',
+        scheme: 'BharatNet Border Expansion'
+    },
+    {
+        rank: 14,
+        id: 'proj-14',
+        name: 'Ghaghra Basin Flood-Resilient Elevated Embankment Corridor',
+        location: 'Bahraich, Uttar Pradesh',
+        ministry: 'morth',
+        ministryName: 'MoRTH / UP PWD',
+        pvi: 91.2,
+        cost: 72.0,
+        beneficiaries: '115,000 Citizens',
+        timeline: '16 Months',
+        gatiShaktiCoord: '27.5744° N, 81.5942° E',
+        rationale: 'Elevates 38km of rural arterial access above 50-year high flood levels with RCC box culverts and disaster shelter platforms.',
+        scheme: 'PMGSY-IV Special Flood Mitigation'
+    },
+    {
+        rank: 15,
+        id: 'proj-15',
+        name: 'Bundelkhand Decentralized Agrivoltaic Feeder Grid',
+        location: 'Chhatarpur, Madhya Pradesh',
+        ministry: 'power',
+        ministryName: 'Ministry of Power & MNRE',
+        pvi: 89.9,
+        cost: 55.0,
+        beneficiaries: '85,000 Farmers',
+        timeline: '11 Months',
+        gatiShaktiCoord: '24.8912° N, 79.6210° E',
+        rationale: 'Solarized daytime agricultural power feeders powering deep tube-wells and reducing farmer diesel irrigation expenditure by 74%.',
+        scheme: 'PM-KUSUM Component C'
     }
 ];
 
@@ -1054,9 +1147,14 @@ function initPolicyPrioritization() {
 
                 <div class="p-action-row">
                     <span class="meta-tag text-muted"><i class="ph-bold ph-git-branch"></i> ${p.scheme}</span>
-                    <button class="btn btn-xs btn-primary btn-sanction-proj" data-id="${p.id}">
-                        <i class="ph-bold ph-check"></i> Sanction Priority
-                    </button>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-xs btn-outline btn-proj-gemini" data-id="${p.id}" title="Generate Ministerial Dossier with Google Gemini">
+                            <i class="ph-bold ph-sparkle text-cyan"></i> Gemini Brief
+                        </button>
+                        <button class="btn btn-xs btn-primary btn-sanction-proj" data-id="${p.id}">
+                            <i class="ph-bold ph-check"></i> Sanction Priority
+                        </button>
+                    </div>
                 </div>
             `;
             container.appendChild(card);
@@ -1064,7 +1162,7 @@ function initPolicyPrioritization() {
 
         // Add event listeners for sanction buttons
         document.querySelectorAll('.btn-sanction-proj').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            btn.addEventListener('click', () => {
                 const projId = btn.getAttribute('data-id');
                 const proj = CANDIDATE_PROJECTS.find(x => x.id === projId);
                 if (proj) {
@@ -1072,6 +1170,35 @@ function initPolicyPrioritization() {
                     btn.classList.add('btn-outline');
                     btn.innerHTML = '<i class="ph-bold ph-seal-check text-emerald"></i> In Cabinet Pipeline';
                     showToast(`✅ Sanctioned: "${proj.name}" (₹${proj.cost} Cr) added to Active Budget Allocation!`);
+                }
+            });
+        });
+
+        // Add event listeners for Gemini Dossier buttons
+        document.querySelectorAll('.btn-proj-gemini').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const projId = btn.getAttribute('data-id');
+                const proj = CANDIDATE_PROJECTS.find(x => x.id === projId);
+                if (proj) {
+                    const districtObj = {
+                        name: proj.name,
+                        state: proj.location,
+                        cat: proj.scheme,
+                        pvi: proj.pvi,
+                        voices: `${Math.round(proj.pvi * 135).toLocaleString('en-IN')} Citizen Calls`,
+                        topDemand: proj.name,
+                        vuln: `${proj.beneficiaries} directly affected`,
+                        mpi: '38.4% Regional Vulnerability Index',
+                        deficit: proj.rationale,
+                        deficitSub: `Coordinates: ${proj.gatiShaktiCoord}`,
+                        unspent: `₹${(proj.cost * 0.35).toFixed(1)} Cr State Contingency Fund`,
+                        recTitle: proj.name,
+                        recDesc: proj.rationale,
+                        estCost: `₹${proj.cost} Cr`,
+                        beneficiaries: proj.beneficiaries,
+                        timeline: proj.timeline
+                    };
+                    openGeminiModalForDistrict(districtObj);
                 }
             });
         });
@@ -1144,8 +1271,14 @@ function initBudgetOptimizer() {
             if (totalCost + proj.cost <= budgetCeiling) {
                 selected.push(proj);
                 totalCost += proj.cost;
-                // Parse citizen counts
-                const num = parseInt(proj.beneficiaries.replace(/[^0-9]/g, '')) || 50000;
+                // Parse citizen counts accurately (thousands & millions)
+                let num = 50000;
+                if (proj.beneficiaries.toLowerCase().includes('m') || proj.beneficiaries.toLowerCase().includes('million')) {
+                    const parsed = parseFloat(proj.beneficiaries);
+                    num = (parsed || 1) * 1000000;
+                } else {
+                    num = parseInt(proj.beneficiaries.replace(/[^0-9]/g, '')) || 50000;
+                }
                 totalCitizens += num;
                 totalPvi += proj.pvi;
             }
