@@ -524,6 +524,70 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        /* Print / PDF Generation Styles */
+        @media print {
+            @page {
+                size: landscape;
+                margin: 0;
+            }
+
+            html, body {
+                height: auto !important;
+                overflow: visible !important;
+                background: #040712 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .deck-header,
+            .deck-footer,
+            .deck-progress-bar-wrap,
+            .notes-drawer,
+            .deck-controls-top {
+                display: none !important;
+            }
+
+            .slide-viewport {
+                padding: 0 !important;
+                display: block !important;
+                overflow: visible !important;
+                height: auto !important;
+            }
+
+            .slide-stage {
+                max-width: none !important;
+                max-height: none !important;
+                height: auto !important;
+                position: static !important;
+            }
+
+            .slide {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                width: 100vw !important;
+                min-height: 100vh !important;
+                height: 100vh !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                opacity: 1 !important;
+                transform: none !important;
+                pointer-events: auto !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+                padding: 2.5rem 3.5rem !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                background: #070b18 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -545,6 +609,12 @@
 
         <div class="deck-controls-top">
             <span class="slide-counter" id="slide-counter">Slide 1 / 11</span>
+            <a href="JanVani_AI_Presentation.pdf" download="JanVani_AI_Presentation.pdf" class="btn-deck" title="Download Pre-Generated 11-Slide PDF">
+                <i class="ph-bold ph-download-simple text-cyan"></i> Download PDF
+            </a>
+            <button class="btn-deck" onclick="window.print()" title="Print / Save as PDF via Browser">
+                <i class="ph-bold ph-printer text-cyan"></i> Print [Ctrl+P]
+            </button>
             <button class="btn-deck" id="btn-toggle-notes" title="Toggle Presenter Notes (N)">
                 <i class="ph-bold ph-note-pencil"></i> Notes [N]
             </button>
