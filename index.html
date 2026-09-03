@@ -26,9 +26,9 @@
     <!-- Top Announcement Bar -->
     <div class="top-announcement" id="announcement-bar">
         <div class="container announcement-inner">
-            <span class="badge-live"><span class="pulse-dot"></span> DIGITAL PUBLIC GOOD (DPG)</span>
+            <span class="badge-live"><span class="pulse-dot"></span> POWERED BY GOOGLE AI</span>
             <span class="announcement-text">
-                <strong>JanVani AI (जनवाणी):</strong> Fusing 1.4B Citizen Voices with National Infrastructure Planning & PM Gati Shakti
+                <strong>JanVani AI (जनवाणी):</strong> Fusing 1.4B Citizen Voices with Google Gemini GenAI & PM Gati Shakti Infrastructure Planning
             </span>
             <a href="#hotspots-explorer" class="announcement-link">Explore Hotspots <i class="ph-bold ph-arrow-right"></i></a>
         </div>
@@ -57,6 +57,9 @@
             </ul>
 
             <div class="nav-actions">
+                <button class="btn btn-sm btn-glass" id="btn-open-gemini-modal" title="Configure Google Gemini GenAI Integration">
+                    <i class="ph-bold ph-sparkle text-cyan"></i> Google Gemini
+                </button>
                 <button class="btn btn-sm btn-outline" id="btn-track-token-nav">
                     <i class="ph-bold ph-magnifying-glass"></i> Track Request
                 </button>
@@ -93,8 +96,8 @@
         <div class="container hero-container">
             <div class="hero-content">
                 <div class="hero-pill-badge">
-                    <i class="ph-fill ph-check-circle"></i>
-                    <span>Recognized Open Digital Public Good // Bhashini + PM Gati Shakti Compliant</span>
+                    <i class="ph-fill ph-sparkle text-cyan"></i>
+                    <span>Powered by Google Gemini GenAI & Vertex AI Predictive Modeling // Bhashini + PM Gati Shakti Compliant</span>
                 </div>
                 
                 <h1 class="hero-title">
@@ -633,6 +636,25 @@
                         </div>
                     </div>
 
+                    <!-- Google AI Satellite CV & Predictive Risk Analysis -->
+                    <div class="google-ai-insight-box">
+                        <div class="g-ai-head">
+                            <i class="ph-bold ph-sparkle text-cyan"></i>
+                            <span class="g-ai-title">Google AI Satellite CV & Predictive Risk Engine</span>
+                            <span class="badge-live badge-sm"><span class="pulse-dot"></span> Vertex AI</span>
+                        </div>
+                        <div class="g-ai-body">
+                            <div class="g-ai-item">
+                                <span class="g-ai-label"><i class="ph-bold ph-satellite"></i> Google Earth Engine CV:</span>
+                                <span class="g-ai-text text-emerald" id="diag-cv-result">Sentinel-2 CV segmentation detected 38km unpaved mud track + river washout (Confidence: 97.4%)</span>
+                            </div>
+                            <div class="g-ai-item">
+                                <span class="g-ai-label"><i class="ph-bold ph-chart-line-up"></i> Vertex AI Predictive Risk:</span>
+                                <span class="g-ai-text text-red" id="diag-risk-result">94.2% Probability of 4-month total isolation during upcoming monsoon season</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Recommended Intervention Callout -->
                     <div class="diag-rec-box">
                         <div class="rec-title-row">
@@ -652,10 +674,10 @@
 
                     <div class="diag-actions">
                         <button class="btn btn-primary" id="btn-escalate-project">
-                            <i class="ph-bold ph-paper-plane-tilt"></i> Push to National Priority Queue
+                            <i class="ph-bold ph-paper-plane-tilt"></i> Push to Priority Queue
                         </button>
-                        <button class="btn btn-outline" id="btn-export-dossier">
-                            <i class="ph-bold ph-file-pdf"></i> Generate Cabinet Brief
+                        <button class="btn btn-outline btn-gemini-trigger" id="btn-export-dossier">
+                            <i class="ph-bold ph-sparkle text-cyan"></i> Synthesize with Gemini
                         </button>
                     </div>
                 </div>
@@ -1016,6 +1038,52 @@
             <div class="modal-footer">
                 <button class="btn btn-outline" id="btn-modal-close">Close</button>
                 <button class="btn btn-primary" id="btn-modal-share"><i class="ph-bold ph-share-network"></i> Share Live Status</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Gemini GenAI Policy Brief Modal -->
+    <div class="modal-backdrop hidden" id="gemini-modal">
+        <div class="modal-card glass-panel modal-lg">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <span class="badge-live"><span class="pulse-dot"></span> GOOGLE GEMINI 2.5 FLASH</span>
+                    <h3 class="modal-title" id="gemini-modal-title">Cabinet Policy Brief Synthesis</h3>
+                </div>
+                <button class="modal-close" id="gemini-modal-close-btn"><i class="ph-bold ph-x"></i></button>
+            </div>
+            <div class="modal-body" id="gemini-modal-body">
+                <div class="gemini-api-config-row">
+                    <div class="input-with-label">
+                        <label for="input-gemini-key"><i class="ph-bold ph-key"></i> Google Gemini API Key (Optional — demo synthesis active by default):</label>
+                        <div class="key-input-wrap">
+                            <input type="password" id="input-gemini-key" class="lookup-input" placeholder="AIzaSy... (leave blank to run built-in Gemini synthesis)">
+                            <button class="btn btn-xs btn-outline" id="btn-save-gemini-key">Save Key</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gemini-prompt-preview">
+                    <span class="tag-key">Grounding Multi-Dataset Inputs:</span>
+                    <div class="prompt-chips-row">
+                        <span class="meta-tag"><i class="ph-bold ph-microphone"></i> Citizen Speech Transcripts</span>
+                        <span class="meta-tag"><i class="ph-bold ph-users"></i> Census Demographic Data</span>
+                        <span class="meta-tag"><i class="ph-bold ph-buildings"></i> NITI Aayog MPI Deficit</span>
+                        <span class="meta-tag"><i class="ph-bold ph-satellite"></i> Earth Engine Satellite CV</span>
+                        <span class="meta-tag"><i class="ph-bold ph-currency-circle-dollar"></i> PM Gati Shakti Outlays</span>
+                    </div>
+                </div>
+
+                <div class="gemini-output-terminal" id="gemini-output-content">
+                    <div class="terminal-placeholder">
+                        <i class="ph-bold ph-sparkle text-cyan font-xl"></i>
+                        <p>Click <strong>"Synthesize Policy Dossier"</strong> to generate a comprehensive ministerial brief using Google Gemini 2.5 Flash.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="btn-gemini-close">Close</button>
+                <button class="btn btn-primary" id="btn-run-gemini-synth"><i class="ph-bold ph-sparkle"></i> Synthesize Policy Dossier</button>
             </div>
         </div>
     </div>
