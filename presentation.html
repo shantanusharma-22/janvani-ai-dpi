@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JanVani AI // Sovereign Presentation Deck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        :root {
+            --bg-deep: #030712;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.12);
+            --accent-cyan: #06b6d4;
+            --accent-cyan-light: #67e8f9;
+            --accent-violet: #8b5cf6;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-red: #ef4444;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+        }
+
+        /* Ambient Lighting */
+        .ambient-glow {
+            position: absolute;
+            width: 650px;
+            height: 650px;
+            border-radius: 50%;
+            filter: blur(140px);
+            pointer-events: none;
+            opacity: 0.22;
+            z-index: 0;
+        }
+        .glow-1 { top: -150px; left: -150px; background: radial-gradient(circle, var(--accent-cyan), transparent); }
+        .glow-2 { bottom: -150px; right: -150px; background: radial-gradient(circle, var(--accent-violet), transparent); }
+
+        /* Top Presentation Controls Bar */
+        .deck-header {
+            position: relative;
+            z-index: 10;
+            height: 64px;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-glass);
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(12px);
+        }
+
+        .deck-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .brand-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+        .deck-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: rgba(6, 182, 212, 0.15);
+            border: 1px solid rgba(6, 182, 212, 0.4);
+            color: var(--accent-cyan-light);
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+            letter-spacing: 0.05em;
+        }
+
+        .deck-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-ctrl {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glass);
+            color: var(--text-primary);
+            padding: 0.45rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+        .btn-ctrl:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .btn-ctrl.btn-cyan {
+            background: rgba(6, 182, 212, 0.2);
+            border-color: rgba(6, 182, 212, 0.5);
+            color: var(--accent-cyan-light);
+        }
+
+        /* Slide Viewport */
+        .slide-stage {
+            flex: 1;
+            position: relative;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 4rem;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            max-width: 1240px;
+            height: 85vh;
+            max-height: 750px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            padding: 3rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.96) translateY(20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7);
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Slide Typography */
+        .slide-tagline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-cyan-light);
+            margin-bottom: 0.75rem;
+        }
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.15;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+        .slide-desc {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            max-width: 860px;
+        }
+        .highlight-cyan { color: var(--accent-cyan-light); }
+        .highlight-violet { color: #c084fc; }
+        .highlight-emerald { color: #34d399; }
+        .highlight-amber { color: #fbbf24; }
+
+        /* Slide Content Areas */
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .card-panel {
+            background: rgba(6, 9, 19, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            transition: border-color 0.2s;
+        }
+        .card-panel:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+        }
+        .card-icon {
+            font-size: 1.85rem;
+            margin-bottom: 0.25rem;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .card-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Large Stat Card */
+        .stat-banner {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(6, 9, 19, 0.7);
+            border: 1px solid var(--border-glass);
+            border-radius: 14px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+        .stat-banner-item {
+            text-align: center;
+        }
+        .stat-val {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        .stat-lbl {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* Architecture Flow Pipeline */
+        .arch-pipeline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+        .pipe-step {
+            flex: 1;
+            background: rgba(6, 9, 19, 0.7);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            padding: 1.15rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            position: relative;
+        }
+        .pipe-step.active-step {
+            border-color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.08);
+        }
+        .pipe-step .step-num {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            letter-spacing: 0.05em;
+        }
+        .pipe-step .step-name {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .pipe-step .step-sub {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+        .pipe-arrow {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: rgba(6, 9, 19, 0.85);
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            color: #c084fc;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Slide Footer & Navigation Bar */
+        .deck-footer {
+            position: relative;
+            z-index: 10;
+            height: 56px;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-glass);
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(12px);
+        }
+
+        .slide-counter {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .slide-dots {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .dot.active {
+            width: 24px;
+            border-radius: 100px;
+            background: var(--accent-cyan);
+        }
+
+        .keyboard-hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        kbd {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
+    <!-- Header Controls -->
+    <header class="deck-header">
+        <a href="index.html" class="deck-brand">
+            <div class="brand-icon"><i class="ph-duotone ph-broadcast"></i></div>
+            <span>JanVani<span class="highlight-cyan">.AI</span></span>
+            <span class="deck-badge">PITCH DECK // 2026</span>
+        </a>
+
+        <div class="deck-controls">
+            <button class="btn-ctrl" id="btn-fullscreen" title="Toggle Fullscreen (F)">
+                <i class="ph-bold ph-arrows-out"></i> Fullscreen
+            </button>
+            <a href="index.html" class="btn-ctrl btn-cyan">
+                <i class="ph-bold ph-app-window"></i> Open Live Platform
+            </a>
+        </div>
+    </header>
+
+    <!-- Slide Stage -->
+    <main class="slide-stage" id="slide-stage">
+
+        <!-- SLIDE 1: Title & Vision -->
+        <section class="slide active" data-slide="1">
+            <div class="slide-tagline">
+                <i class="ph-bold ph-sparkle"></i> Digital Public Good // India DPI Stack
+            </div>
+            <div class="slide-body">
+                <h1 class="slide-title">
+                    JanVani AI <span class="highlight-cyan">(जनवाणी AI)</span><br>
+                    <span style="font-size: 1.85rem; color: #cbd5e1; font-weight: 500;">
+                        National Citizen Demand Aggregation & Infrastructure Prioritization Engine
+                    </span>
+                </h1>
+                <p class="slide-desc">
+                    Unifying <strong>1.4 Billion Citizen Voices</strong> across 22 Scheduled Indian languages with 
+                    <strong>Census Demographics</strong>, <strong>Physical Infrastructure Deficits</strong>, and 
+                    <strong>PM Gati Shakti National Master Plan</strong> to eliminate biased public capital spending.
+                </p>
+
+                <div class="stat-banner">
+                    <div class="stat-banner-item">
+                        <div class="stat-val highlight-cyan">4.82M+</div>
+                        <div class="stat-lbl">Citizen Grievances Aggregated</div>
+                    </div>
+                    <div class="stat-banner-item">
+                        <div class="stat-val highlight-emerald">766</div>
+                        <div class="stat-lbl">Indian Districts Mapped</div>
+                    </div>
+                    <div class="stat-banner-item">
+                        <div class="stat-val highlight-violet">22</div>
+                        <div class="stat-lbl">Scheduled Languages (Bhashini)</div>
+                    </div>
+                    <div class="stat-banner-item">
+                        <div class="stat-val highlight-amber">₹3,420 Cr</div>
+                        <div class="stat-lbl">Capital Outlay Optimized</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer-meta text-muted" style="font-size: 0.8rem; display: flex; justify-content: space-between;">
+                <span>Presented for Sovereign Governments & Public Infrastructure Boards</span>
+                <span>Powered by Google Gemini 2.5 Flash & Vertex AI</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: The Core Problem -->
+        <section class="slide" data-slide="2">
+            <div class="slide-tagline">
+                <i class="ph-bold ph-warning-circle"></i> The Structural Crisis in Public Spending
+            </div>
+            <div class="slide-body">
+                <h2 class="slide-title">Fragmented Citizen Signals & Misallocated Budgets</h2>
+                <p class="slide-desc">
+                    State and Central ministries allocate thousands of crores annually, yet acute infrastructure deficits persist across India's remote and tribal hamlets.
+                </p>
+
+                <div class="grid-3" style="margin-top: 1.5rem;">
+                    <div class="card-panel">
+                        <div class="card-icon highlight-red"><i class="ph-duotone ph-tree-structure"></i></div>
+                        <h3 class="card-title">Departmental Data Silos</h3>
+                        <p class="card-desc">
+                            Grievances live in isolated portals (CPGRAMS, state call centers, paper applications). Roads, water, and health departments never coordinate capital works.
+                        </p>
+                    </div>
+
+                    <div class="card-panel">
+                        <div class="card-icon highlight-amber"><i class="ph-duotone ph-chart-bar-horizontal"></i></div>
+                        <h3 class="card-title">Capital Misalignment</h3>
+                        <p class="card-desc">
+                            Budgets are frequently disbursed via political lobbying rather than empirical citizen distress. Meanwhile, crores in District Mineral Foundation (DMF) funds sit unspent.
+                        </p>
+                    </div>
+
+                    <div class="card-panel">
+                        <div class="card-icon highlight-cyan"><i class="ph-duotone ph-arrows-split"></i></div>
+                        <h3 class="card-title">Zero Closed-Loop DPI</h3>
+                        <p class="card-desc">
+                            Citizens who raise infrastructure demands have no transparent tracking token or way to verify whether multi-crore public projects actually resolved their distress.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer-meta text-muted" style="font-size: 0.8rem;">
+                Root Cause: Absence of an automated semantic bridge between bottom-up vernacular demand and top-down GIS master planning.
+            </div>
+        </section>
+
+        <!-- SLIDE 3: The Architecture Solution -->
+        <section class="slide" data-slide="3">
+            <div class="slide-tagline">
+                <i class="ph-bold ph-cpu"></i> System Architecture
+            </div>
+            <div class="slide-body">
+                <h2 class="slide-title">The JanVani Multi-Layer Data Fusion Pipeline</h2>
+                <p class="slide-desc">
+                    Raw citizen voice signals are filtered, geotagged to Local Government Directory (LGD) village codes, and cross-referenced against authoritative sovereign datasets.
+                </p>
+
+                <div class="arch-pipeline">
+                    <div class="pipe-step active-step">
+                        <span class="step-num">LAYER 1</span>
+                        <span class="step-name">Citizen Voice ASR</span>
+                        <span class="step-sub">Bhashini AI 22 Langs / WhatsApp IVR</span>
+                    </div>
+                    <i class="ph-bold ph-arrow-right pipe-arrow"></i>
+                    <div class="pipe-step">
+                        <span class="step-num">LAYER 2</span>
+                        <span class="step-name">Census & MPI Baseline</span>
+                        <span class="step-sub">NITI Aayog Poverty & Vulnerability</span>
+                    </div>
+                    <i class="ph-bold ph-arrow-right pipe-arrow"></i>
+                    <div class="pipe-step">
+                        <span class="step-num">LAYER 3</span>
+                        <span class="step-name">Physical Deficit Index</span>
+                        <span class="step-sub">Jal Jeevan % / PMGSY Connectivity</span>
+                    </div>
+                    <i class="ph-bold ph-arrow-right pipe-arrow"></i>
+                    <div class="pipe-step">
+                        <span class="step-num">LAYER 4</span>
+                        <span class="step-name">PM Gati Shakti GIS</span>
+                        <span class="step-sub">44 Geospatial Infrastructure Layers</span>
+                    </div>
+                    <i class="ph-bold ph-arrow-right pipe-arrow"></i>
+                    <div class="pipe-step active-step">
+                        <span class="step-num">LAYER 5</span>
+                        <span class="step-name">PVI Prioritization</span>
+                        <span class="step-sub">Cabinet Decision Intelligence</span>
+                    </div>
+                </div>
+
+                <div class="formula-box">
+                    Public Value Index (PVI) = 0.30(Demand) + 0.25(Vulnerability) + 0.25(Deficit) + 0.20(Multiplier) - Friction
+                </div>
+            </div>
+            <div class="slide-footer-meta text-muted" style="font-size: 0.8rem;">
+                Ensures that every recommended project is grounded in both democratic demand and statutory planning feasibility.
+            </div>
+        </section>
+
+        <!-- SLIDE 4: Google AI Integration -->
+        <section class="slide" data-slide="4">
+            <div class="slide-tagline">
+                <i class="ph-bold ph-sparkle"></i> Mandatory Google AI Integration
+            </div>
+            <div class="slide-body">
+                <h2 class="slide-title">Google Gemini GenAI, Earth Engine & Vertex AI</h2>
+                <p class="slide-desc">
+                    Combining cutting-edge Generative AI with satellite computer vision to automate policy briefing and defect detection.
+                </p>
+
+                <div class="grid-3" style="margin-top: 1.5rem;">
+                    <div class="card-panel">
+                        <div class="card-icon highlight-cyan"><i class="ph-duotone ph-sparkle"></i></div>
+                        <h3 class="card-title">Google Gemini 2.5 Flash</h3>
+                        <p class="card-desc">
+                            <strong>GenAI Cabinet Policy Synthesis:</strong> Synthesizes official ministerial briefs grounding multi-dialect citizen speech with census poverty statistics and PM Gati Shakti alignment in real time.
+                        </p>
+                    </div>
+
+                    <div class="card-panel">
+                        <div class="card-icon highlight-emerald"><i class="ph-duotone ph-satellite"></i></div>
+                        <h3 class="card-title">Google Earth Engine CV</h3>
+                        <p class="card-desc">
+                            <strong>Satellite Computer Vision:</strong> Sentinel-2 multispectral segmentation verifies citizen grievances on the ground, detecting 38km unpaved mud tracks and washed-out bridges with 97.4% accuracy.
+                        </p>
+                    </div>
+
+                    <div class="card-panel">
+                        <div class="card-icon highlight-violet"><i class="ph-duotone ph-chart-line-up"></i></div>
+                        <h3 class="card-title">Google Vertex AI Modeling</h3>
+                        <p class="card-desc">
+                            <strong>Predictive Risk Forecasting:</strong> ML risk models forecast probability of total monsoon isolation (94.2% in Malkangiri) and avoidable maternal complications before seasonal crises strike.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer-meta text-muted" style="font-size: 0.8rem;">
+                Supports direct Google Gemini API Key injection with real-time streaming Markdown outputs.
+            </div>
+        </section>
+
+        <!-- SLIDE 5: Multilingual Voice AI (Bhashini + WhatsApp) -->
+        <section class="slide" data-slide="5">
+            <div class="slide-tagline">
+                <i class="ph-bold ph-microphone"></i> Built for Bharat
+            </div>
+            <div class="slide-body">
+                <h2 class="slide-title">Omnichannel Multilingual Citizen Ingestion</h2>
+                <p class="slide-desc">
+                    Zero literacy barriers. Rural citizens submit infrastructure requests through everyday voice notes and WhatsApp in their native dialects.
+                </p>
+
+                <div class="grid-2" style="margin-top: 1.25rem;">
+                    <div class="card-panel">
+                        <div class="card-icon highlight-cyan"><i class="ph-duotone ph-waveform"></i></div>
+                        <h3 class="card-title">Bhashini Dialect Presets</h3>
+                        <p class="card-desc">
+                            Integrated with Web Audio Synthesizer and Web Speech API. Native presets in <strong>Hindi (Bundeli)</strong>, <strong>Tamil (Dharmapuri)</strong>, <strong>Bengali (Purulia)</strong>, <strong>Marathi (Bhilori)</strong>, <strong>Odia (Desia)</strong>, and <strong>Telugu (Asifabad)</strong>.
+                        </p>
+                        <div style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--accent-cyan-light); font-family: var(--font-mono);">
+                            Zero-Shot Entity Extraction: Infrastructure Domain, Scheme Tag, Severity, Beneficiaries.
+                        </div>
+                    </div>
+
+                    <div class="card-panel">
+                        <div class="card-icon highlight-emerald"><i class="ph-duotone ph-chat-circle-dots"></i></div>
+                        <h3 class="card-title">WhatsApp & SMS Bot Mockup</h3>
+                        <p class="card-desc">
+                            Simulates real-time messaging interactions. Geotags requests to Local Government Directory (LGD) village IDs and issues cryptographic tracking tokens (e.g. <code>#JV-2026-MP-49218</code>) instantly.
+                        </p>
+                        <div style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--accent-emerald); font-family: var(--font-mono);">
+                            Automatic LGD Geotagging + CPGRAMS Cross-Referencing.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer-meta text-muted" style="font-size: 0.8rem;">
+                Democratizes public governance by ensuring marginalized tribal and rural voices are heard equally.
+            </div>
+        </section>
+
+        <!-- SLIDE 6: GIS Hotspots & District Diagnostics -->
+        <section class="slide" data-slide="6">
+            <div class="slide-tagline">
+                <i class="ph-bold ph-map-pin"></i> Spatial Decision Cockpit
+            </div>
+            <div class="slide-body">
+                <h2 class="slide-title">National Demand Hotspots (Vector GIS Cockpit)</h2>
+                <p class="slide-desc">
+                    Interactive India vector geospatial radar monitoring 12 critical Aspirational Districts with live diagnostic cards.
+                </p>
+
+                <div class="grid-4" style="margin-top: 1.5rem;">
+                    <div class="card-panel">
+                        <span class="highlight-red" style="font-size: 0.75rem; font-weight: 700;">ASPIRATIONAL #01</span>
+                        <h4 class="card-title" style="font-size: 1rem;">Malkangiri (Odisha)</h4>
+                        <p class="card-desc" style="font-size: 0.8rem;">PVI: 96.4 • Sileru River High-Level Bridge. 48,000 tribal citizens cut off during monsoons.</p>
+                    </div>
+
+                    <div class="card-panel">
+                        <span class="highlight-red" style="font-size: 0.75rem; font-weight: 700;">ASPIRATIONAL #02</span>
+                        <h4 class="card-title" style="font-size: 1rem;">Nandurbar (Maha)</h4>
+                        <p class="card-desc" style="font-size: 0.8rem;">PVI: 93.8 • Dhadgaon Solar Water Grid. 74% drinking water deficit across Satpura hills.</p>
+                    </div>
+
+                    <div class="card-panel">
+                        <span class="highlight-amber" style="font-size: 0.75rem; font-weight: 700;">ASPIRATIONAL #03</span>
+                        <h4 class="card-title" style="font-size: 1rem;">Bastar (Chhattisgarh)</h4>
+                        <p class="card-desc" style="font-size: 0.8rem;">PVI: 94.2 • Forest Solar Microgrid Hubs. 24/7 cold chain power for primary health centers.</p>
+                    </div>
+
+                    <div class="card-panel">
+                        <span class="highlight-amber" style="font-size: 0.75rem; font-weight: 700;">ASPIRATIONAL #04</span>
+                        <h4 class="card-title" style="font-size: 1rem;">Nuh / Mewat (Haryana)</h4>
+                        <p class="card-desc" style="font-size: 0.8rem;">PVI: 91.5 • 100-Bed Maternal Care Block. Bed ratio (0.4/1,000) lowest in NCR region.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1.5rem; text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
+                    Also tracking: <strong>Bahraich (UP)</strong>, <strong>Purulia (WB)</strong>, <strong>Kalahandi (OD)</strong>, <strong>Baramulla (JK)</strong>, <strong>Purnia (BR)</strong>, <strong>Raichur (KA)</strong>, <strong>Wayanad (KL)</strong>, <strong>Chhatarpur (MP)</strong>.
+                </div>
+            </div>
+            <div class="slide-footer-meta text-muted" style="font-size: 0.8rem;">
+                Each hotspot synthesizes citizen voice volume, unspent DMF reserves, and recommended engineering interventions.
+            </div>
+        </section>
+
+        <!-- SLIDE 7: Knapsack Budget Optimizer -->
+        <section class="slide" data-slide="7">
+            <div class="slide-tagline">
+                <i class="ph-bold ph-sliders"></i> Capital Allocation Engine
+            </div>
+            <div class="slide-body">
+                <h2 class="slide-title">Pareto-Optimal Knapsack Budget Allocation</h2>
+                <p class="slide-desc">
+                    Policymakers test capital outlays dynamically from ₹200 Cr to ₹5,000 Cr with instant mathematical optimization.
+                </p>
+
+                <div class="grid-3" style="margin-top: 1.5rem;">
+                    <div class="card-panel">
+                        <div class="card-icon highlight-cyan"><i class="ph-duotone ph-scales"></i></div>
+                        <h3 class="card-title">Balanced Strategy</h3>
+                        <p class="card-desc">
+                            Maximizes net Public Value Index (PVI) per crore spent across all sectors (roads, water, healthcare, power, education).
+                        </p>
+                    </div>
+
+                    <div class="card-panel">
+                        <div class="card-icon highlight-violet"><i class="ph-duotone ph-hand-heart"></i></div>
+                        <h3 class="card-title">Tribal / Vulnerability</h3>
+                        <p class="card-desc">
+                            Applies a 1.4x equity multiplier for PVTG tribal areas (PM-JANMAN), ensuring affirmative allocation to historically neglected hamlets.
+                        </p>
+                    </div>
+
+                    <div class="card-panel">
+                        <div class="card-icon highlight-emerald"><i class="ph-duotone ph-lightning"></i></div>
+                        <h3 class="card-title">Rapid Execution</h3>
+                        <p class="card-desc">
+                            Biases toward projects completing in under 12 months with pre-cleared PM Gati Shakti environmental clearances.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="stat-banner" style="margin-top: 1.5rem;">
+                    <div class="stat-banner-item">
+                        <div class="stat-val highlight-cyan">15</div>
+                        <div class="stat-lbl">Active Capital Projects</div>
+                    </div>
+                    <div class="stat-banner-item">
+                        <div class="stat-val highlight-emerald">94.8%</div>
+                        <div class="stat-lbl">Capital Utilization Efficiency</div>
+                    </div>
+                    <div class="stat-banner-item">
+                        <div class="stat-val highlight-violet">1.84M</div>
+                        <div class="stat-lbl">Direct Citizen Reach</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer-meta text-muted" style="font-size: 0.8rem;">
+                Solves the bounded 0-1 Knapsack problem in real time in the browser with zero server latency.
+            </div>
+        </section>
+
+        <!-- SLIDE 8: Closed-Loop Impact & DPI Standards -->
+        <section class="slide" data-slide="8">
+            <div class="slide-tagline">
+                <i class="ph-bold ph-shield-check"></i> Sovereign DPI Standards
+            </div>
+            <div class="slide-body">
+                <h2 class="slide-title">Impact Measurement & Digital Public Good Compliance</h2>
+                <p class="slide-desc">
+                    Built to adhere to sovereign Indian DPI frameworks and international Digital Public Goods Alliance (DPGA) standards.
+                </p>
+
+                <div class="grid-2" style="margin-top: 1.5rem;">
+                    <div class="card-panel">
+                        <h3 class="card-title highlight-cyan">Empirical Impact Indicators</h3>
+                        <ul style="margin-left: 1.25rem; font-size: 0.9rem; line-height: 1.8; color: var(--text-secondary);">
+                            <li><strong>Hospital Commute Time:</strong> Reduced from 3.4 hrs to 28 mins in flood-affected blocks.</li>
+                            <li><strong>Waterborne Disease:</strong> 34.2% $\rightarrow$ 4.8% drop after solar micro-lift deployment.</li>
+                            <li><strong>Auditable Public Ledger:</strong> Every citizen request issued an immutable cryptographic token (`#JV-2026-MP-49218`).</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-panel">
+                        <h3 class="card-title highlight-emerald">DPI Architecture Compliance</h3>
+                        <ul style="margin-left: 1.25rem; font-size: 0.9rem; line-height: 1.8; color: var(--text-secondary);">
+                            <li><strong>Beckn Protocol v2:</strong> Standardized tenders and open public contracting schemas.</li>
+                            <li><strong>DEPA Privacy:</strong> Differential Privacy ($\varepsilon = 0.5$) preventing citizen re-identification.</li>
+                            <li><strong>MIT Open Source:</strong> Zero vendor lock-in. Sovereign deployment for Indian States.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer-meta text-muted" style="font-size: 0.8rem;">
+                Aligns with the UN Sustainable Development Goals: SDG 9 (Infrastructure), SDG 6 (Clean Water), SDG 10 (Reduced Inequalities).
+            </div>
+        </section>
+
+        <!-- SLIDE 9: Roadmap & Conclusion -->
+        <section class="slide" data-slide="9">
+            <div class="slide-tagline">
+                <i class="ph-bold ph-rocket-launch"></i> National Rollout
+            </div>
+            <div class="slide-body">
+                <h2 class="slide-title">Scaling JanVani AI Across All 766 Districts</h2>
+                <p class="slide-desc">
+                    A ready-to-deploy sovereign intelligence layer bridging Indian democracy with national infrastructure planning.
+                </p>
+
+                <div class="grid-3" style="margin-top: 1.5rem;">
+                    <div class="card-panel">
+                        <span class="highlight-cyan" style="font-weight: 700; font-size: 0.8rem;">PHASE 1 (COMPLETED)</span>
+                        <h3 class="card-title">Prototype & Core Engine</h3>
+                        <p class="card-desc">
+                            Bhashini speech AI, 12-district GIS cockpit, Knapsack budget optimizer, and Google Gemini policy brief integration.
+                        </p>
+                    </div>
+
+                    <div class="card-panel">
+                        <span class="highlight-violet" style="font-weight: 700; font-size: 0.8rem;">PHASE 2 (MONTHS 1–3)</span>
+                        <h3 class="card-title">State Planning Pilots</h3>
+                        <p class="card-desc">
+                            Pilot deployment in Odisha & Maharashtra Aspirational Districts; API integration with CPGRAMS and PMGSY-IV servers.
+                        </p>
+                    </div>
+
+                    <div class="card-panel">
+                        <span class="highlight-emerald" style="font-weight: 700; font-size: 0.8rem;">PHASE 3 (MONTHS 4–12)</span>
+                        <h3 class="card-title">Nationwide DPI Scale</h3>
+                        <p class="card-desc">
+                            Full integration into PM Gati Shakti National Master Plan across all 28 States and 8 Union Territories.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; text-align: center;">
+                    <a href="index.html" class="btn-ctrl btn-cyan" style="display: inline-flex; padding: 0.75rem 2rem; font-size: 1rem; border-radius: 8px;">
+                        <i class="ph-bold ph-arrow-square-out"></i> Launch Live Interactive Platform
+                    </a>
+                </div>
+            </div>
+            <div class="slide-footer-meta text-muted" style="font-size: 0.8rem; display: flex; justify-content: space-between;">
+                <span>Repository: github.com/shantanusharma-22/janvani-ai-dpi</span>
+                <span>Contact: shantanusharma848@gmail.com</span>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Presentation Footer Controls -->
+    <footer class="deck-footer">
+        <div class="slide-counter">
+            SLIDE <span id="current-slide" class="highlight-cyan">1</span> / <span id="total-slides">9</span>
+        </div>
+
+        <div class="slide-dots" id="slide-dots">
+            <!-- Injected via JS -->
+        </div>
+
+        <div class="keyboard-hint">
+            <span>Navigate:</span>
+            <kbd>←</kbd> <kbd>→</kbd> or <kbd>Space</kbd>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const totalSlidesEl = document.getElementById('total-slides');
+            const currentSlideEl = document.getElementById('current-slide');
+            const dotsContainer = document.getElementById('slide-dots');
+            const btnFullscreen = document.getElementById('btn-fullscreen');
+            let currentIndex = 0;
+
+            totalSlidesEl.textContent = slides.length;
+
+            // Generate dots
+            slides.forEach((_, idx) => {
+                const dot = document.createElement('div');
+                dot.className = `dot ${idx === 0 ? 'active' : ''}`;
+                dot.addEventListener('click', () => goToSlide(idx));
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = document.querySelectorAll('.dot');
+
+            function updateSlide() {
+                slides.forEach((s, idx) => {
+                    s.classList.toggle('active', idx === currentIndex);
+                });
+                dots.forEach((d, idx) => {
+                    d.classList.toggle('active', idx === currentIndex);
+                });
+                currentSlideEl.textContent = currentIndex + 1;
+            }
+
+            function goToSlide(index) {
+                if (index < 0) index = 0;
+                if (index >= slides.length) index = slides.length - 1;
+                currentIndex = index;
+                updateSlide();
+            }
+
+            function nextSlide() {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                    updateSlide();
+                }
+            }
+
+            function prevSlide() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateSlide();
+                }
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                    e.preventDefault();
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    prevSlide();
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    goToSlide(0);
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    goToSlide(slides.length - 1);
+                } else if (e.key === 'f' || e.key === 'F') {
+                    toggleFullscreen();
+                }
+            });
+
+            // Fullscreen toggle
+            function toggleFullscreen() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(() => {});
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen().catch(() => {});
+                    }
+                }
+            }
+
+            if (btnFullscreen) {
+                btnFullscreen.addEventListener('click', toggleFullscreen);
+            }
+        });
+    </script>
+</body>
+</html>
