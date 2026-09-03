@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JanVani AI // National Citizen Demand Aggregation & Infrastructure Prioritization Platform</title>
+    <meta name="description" content="A scalable, multilingual AI platform designed as a Digital Public Good (DPG) that aggregates citizen development requests across voice, text, and messaging in India, fuses them with national demographic data and infrastructure indices, and recommends high-priority projects to policymakers.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+    <!-- Ambient Background Lighting -->
+    <div class="ambient-glow glow-top-left"></div>
+    <div class="ambient-glow glow-top-right"></div>
+    <div class="ambient-glow glow-center"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Top Announcement Bar -->
+    <div class="top-announcement" id="announcement-bar">
+        <div class="container announcement-inner">
+            <span class="badge-live"><span class="pulse-dot"></span> DIGITAL PUBLIC GOOD (DPG)</span>
+            <span class="announcement-text">
+                <strong>JanVani AI (जनवाणी):</strong> Fusing 1.4B Citizen Voices with National Infrastructure Planning & PM Gati Shakti
+            </span>
+            <a href="#hotspots-explorer" class="announcement-link">Explore Hotspots <i class="ph-bold ph-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="main-nav">
+        <div class="container nav-container">
+            <a href="#" class="brand-logo">
+                <div class="brand-icon">
+                    <i class="ph-duotone ph-broadcast"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">JanVani<span class="brand-accent">.AI</span></span>
+                    <span class="brand-subtitle">Infra Demand Intelligence // भारत DPI</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#ingestion-hub" class="nav-link">Citizen Ingestion</a></li>
+                <li><a href="#data-fusion" class="nav-link">Data Fusion Engine</a></li>
+                <li><a href="#hotspots-explorer" class="nav-link">Demand Hotspots <span class="nav-badge">Live GIS</span></a></li>
+                <li><a href="#policy-cockpit" class="nav-link">AI Prioritization Cockpit</a></li>
+                <li><a href="#budget-optimizer" class="nav-link">Budget Optimizer</a></li>
+                <li><a href="#impact-metrics" class="nav-link">DPI Impact Loop</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="btn btn-sm btn-outline" id="btn-track-token-nav">
+                    <i class="ph-bold ph-magnifying-glass"></i> Track Request
+                </button>
+                <a href="#policy-cockpit" class="btn btn-sm btn-primary">
+                    <i class="ph-bold ph-chart-line-up"></i> Policy Cockpit
+                </a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+                <i class="ph-bold ph-list"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <span class="brand-title">JanVani<span class="brand-accent">.AI</span></span>
+            <button class="drawer-close" id="drawer-close"><i class="ph-bold ph-x"></i></button>
+        </div>
+        <ul class="drawer-links">
+            <li><a href="#ingestion-hub" class="drawer-link">Multilingual Citizen Ingestion</a></li>
+            <li><a href="#data-fusion" class="drawer-link">Triple Data Fusion Architecture</a></li>
+            <li><a href="#hotspots-explorer" class="drawer-link">National Hotspots GIS Map</a></li>
+            <li><a href="#policy-cockpit" class="drawer-link">AI Project Prioritization Cockpit</a></li>
+            <li><a href="#budget-optimizer" class="drawer-link">National Budget Optimizer</a></li>
+            <li><a href="#impact-metrics" class="drawer-link">Closed-Loop Impact Measurement</a></li>
+            <li><a href="#dpg-specs" class="drawer-link">Digital Public Good Specs & API</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero-section" id="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-pill-badge">
+                    <i class="ph-fill ph-check-circle"></i>
+                    <span>Recognized Open Digital Public Good // Bhashini + PM Gati Shakti Compliant</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    Aligning <span class="gradient-text">1.4 Billion Citizen Voices</span> with National Infrastructure Priorities
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Development requests live in fragmented departmental silos, leading to misaligned public capital outlays and unaddressed regional gaps. <strong>JanVani AI</strong> aggregates bottom-up citizen demands via voice, SMS, and WhatsApp across 22 Scheduled Indian languages, fuses them with Census demographics and national infrastructure indices, and recommends high-ROI public works directly to policymakers.
+                </p>
+
+                <div class="hero-cta-group">
+                    <a href="#ingestion-hub" class="btn btn-lg btn-primary shadow-glow">
+                        <i class="ph-bold ph-microphone"></i> Test Multilingual Voice Ingestion
+                    </a>
+                    <a href="#hotspots-explorer" class="btn btn-lg btn-glass">
+                        <i class="ph-bold ph-map-pin"></i> View National Demand Hotspots
+                    </a>
+                </div>
+
+                <div class="hero-metrics-bar">
+                    <div class="metric-item">
+                        <span class="metric-number" data-target="4.82" data-suffix="M+">4.82M+</span>
+                        <span class="metric-label">Citizen Demands Aggregated</span>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric-item">
+                        <span class="metric-number" data-target="766" data-suffix=" Districts">766 Districts</span>
+                        <span class="metric-label">Pan-India Geographic Coverage</span>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric-item">
+                        <span class="metric-number" data-target="22" data-suffix=" Languages">22 Languages</span>
+                        <span class="metric-label">Native Bhashini Voice AI Engines</span>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric-item">
+                        <span class="metric-number" data-target="89.4" data-suffix="%">89.4%</span>
+                        <span class="metric-label">Budget Alignment Accuracy</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="radar-card glass-panel">
+                    <div class="radar-header">
+                        <div class="live-dot-container">
+                            <span class="live-indicator"></span>
+                            <span class="radar-title">REAL-TIME INFRA DEMAND STREAM</span>
+                        </div>
+                        <span class="live-timestamp" id="live-clock">SYNCED 12:00:00 IST</span>
+                    </div>
+
+                    <!-- Live Incoming Stream Ticker -->
+                    <div class="live-stream-box" id="live-stream-ticker">
+                        <div class="stream-item stream-pulse">
+                            <div class="stream-badge badge-red">CRITICAL ROAD DEFICIT</div>
+                            <div class="stream-text">
+                                <strong>Malkangiri, Odisha</strong> • Dialect: <em>Desia Oriya</em><br>
+                                "Bridge over Sileru river washed out; 14 tribal villages cut off from PHC."
+                            </div>
+                            <div class="stream-meta">
+                                <span>Voice Note via WhatsApp</span> • <span class="text-cyan">PVI Impact: 96.4</span>
+                            </div>
+                        </div>
+                        <div class="stream-item">
+                            <div class="stream-badge badge-amber">WATER SUPPLY GAP</div>
+                            <div class="stream-text">
+                                <strong>Nandurbar, Maharashtra</strong> • Dialect: <em>Bhilori / Marathi</em><br>
+                                "Borewells dried up; women walking 4km daily to secondary canal."
+                            </div>
+                            <div class="stream-meta">
+                                <span>Toll-Free IVR</span> • <span class="text-cyan">PVI Impact: 92.1</span>
+                            </div>
+                        </div>
+                        <div class="stream-item">
+                            <div class="stream-badge badge-violet">PRIMARY HEALTH CARE</div>
+                            <div class="stream-text">
+                                <strong>Nuh / Mewat, Haryana</strong> • Dialect: <em>Mewati / Hindi</em><br>
+                                "Sub-health center lacks maternal cold storage & all-weather approach."
+                            </div>
+                            <div class="stream-meta">
+                                <span>SMS Ingestion</span> • <span class="text-cyan">PVI Impact: 88.7</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="radar-telemetry">
+                        <div class="telemetry-row">
+                            <span class="tele-label">Voice Ingestion Rate</span>
+                            <span class="tele-val text-emerald">1,840 calls / min</span>
+                        </div>
+                        <div class="telemetry-bar"><div class="bar-fill fill-emerald" style="width: 78%;"></div></div>
+
+                        <div class="telemetry-row">
+                            <span class="tele-label">Entity & Geo-Tagging Precision</span>
+                            <span class="tele-val text-cyan">98.6% (LGD Verified)</span>
+                        </div>
+                        <div class="telemetry-bar"><div class="bar-fill fill-cyan" style="width: 98%;"></div></div>
+
+                        <div class="telemetry-row">
+                            <span class="tele-label">PM Gati Shakti Cross-Referencing</span>
+                            <span class="tele-val text-violet">Active (44 National Layers)</span>
+                        </div>
+                        <div class="telemetry-bar"><div class="bar-fill fill-violet" style="width: 92%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 1: Multilingual Citizen Ingestion Hub (Voice, SMS, WhatsApp) -->
+    <section class="section-container" id="ingestion-hub">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-pill badge-cyan">OMNICHANNEL CITIZEN INGESTION</span>
+                <h2 class="section-heading">Voice, Text & Messaging Ingestion Across India</h2>
+                <p class="section-description">
+                    Empowering citizens in remote hamlets to articulate development priorities in their mother tongue through standard WhatsApp, SMS, or toll-free voice calls—powered by Bhashini Speech-to-Intent AI.
+                </p>
+            </div>
+
+            <!-- Ingestion Tabs / Channels -->
+            <div class="ingestion-layout-grid">
+                <!-- Left: Voice & Audio Ingestion Console -->
+                <div class="ingestion-console glass-panel">
+                    <div class="panel-header">
+                        <div class="panel-title-wrap">
+                            <i class="ph-duotone ph-microphone-stage text-cyan"></i>
+                            <div>
+                                <h3 class="panel-title">Bhashini Multilingual Voice Terminal</h3>
+                                <span class="panel-subtitle">Select a dialect preset or use your own microphone</span>
+                            </div>
+                        </div>
+                        <span class="channel-badge badge-cyan"><i class="ph-bold ph-waveform"></i> Voice AI Live</span>
+                    </div>
+
+                    <!-- Language Selector Bar -->
+                    <div class="lang-selector-group">
+                        <span class="lang-label">Dialect Presets:</span>
+                        <div class="lang-pills-row" id="voice-lang-pills">
+                            <button class="lang-pill active" data-lang="hindi">
+                                <span class="lang-script">हिन्दी</span> Hindi (Bundeli/MP)
+                            </button>
+                            <button class="lang-pill" data-lang="tamil">
+                                <span class="lang-script">தமிழ்</span> Tamil (Dharmapuri)
+                            </button>
+                            <button class="lang-pill" data-lang="bengali">
+                                <span class="lang-script">বাংলা</span> Bengali (Purulia)
+                            </button>
+                            <button class="lang-pill" data-lang="marathi">
+                                <span class="lang-script">मराठी</span> Marathi (Nandurbar)
+                            </button>
+                            <button class="lang-pill" data-lang="odia">
+                                <span class="lang-script">ଓଡ଼ିଆ</span> Odia (Malkangiri)
+                            </button>
+                            <button class="lang-pill" data-lang="telugu">
+                                <span class="lang-script">తెలుగు</span> Telugu (Adilabad)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Citizen Profile Info -->
+                    <div class="citizen-mini-profile">
+                        <div class="profile-avatar"><i class="ph-bold ph-user-sound"></i></div>
+                        <div class="profile-meta">
+                            <span class="profile-name" id="sim-citizen-name">Rameshwar Ahirwar</span>
+                            <span class="profile-loc" id="sim-citizen-loc"><i class="ph-bold ph-map-pin"></i> Block: Shahgarh, Chhatarpur, MP</span>
+                        </div>
+                        <span class="profile-id badge-glass" id="sim-citizen-tag">Local Govt Directory #LGD-4921</span>
+                    </div>
+
+                    <!-- Audio Waveform Display -->
+                    <div class="audio-waveform-box" id="waveform-box">
+                        <div class="waveform-viz" id="waveform-viz">
+                            <div class="w-bar bar-1"></div>
+                            <div class="w-bar bar-2"></div>
+                            <div class="w-bar bar-3"></div>
+                            <div class="w-bar bar-4"></div>
+                            <div class="w-bar bar-5"></div>
+                            <div class="w-bar bar-6"></div>
+                            <div class="w-bar bar-7"></div>
+                            <div class="w-bar bar-8"></div>
+                            <div class="w-bar bar-9"></div>
+                            <div class="w-bar bar-10"></div>
+                        </div>
+                        <div class="utterance-box">
+                            <div class="original-speech" id="sim-utterance-text">
+                                "हमारे गाँव महोबा रोड से जुड़ने वाली पुलिया हर बरसात में बह जाती है। स्कूली बच्चे ३ महीने तक नदी पार नहीं कर पाते और एम्बुलेंस गाँव तक नहीं पहुँच पाती।"
+                            </div>
+                            <div class="translated-speech" id="sim-translation-text">
+                                <em>AI Translation (English):</em> "The culvert connecting our village to Mahoba Road washes away every monsoon. Schoolchildren cannot cross the river for 3 months and ambulances cannot reach us."
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Controls -->
+                    <div class="voice-actions-bar">
+                        <button class="btn btn-primary" id="btn-play-voice">
+                            <i class="ph-bold ph-speaker-high"></i> Play Vernacular Audio
+                        </button>
+                        <button class="btn btn-outline" id="btn-mic-record">
+                            <i class="ph-bold ph-microphone"></i> Test Your Microphone
+                        </button>
+                        <button class="btn btn-glass" id="btn-analyze-pipeline">
+                            <i class="ph-bold ph-cpu"></i> Re-Extract Intent & Entities
+                        </button>
+                    </div>
+
+                    <!-- AI Extraction Telemetry -->
+                    <div class="extraction-card" id="extraction-result">
+                        <div class="extraction-header">
+                            <span class="extraction-title"><i class="ph-bold ph-brain"></i> Zero-Shot NLP Entity Extraction</span>
+                            <span class="confidence-badge" id="extraction-confidence">Confidence: 99.4%</span>
+                        </div>
+                        <div class="extracted-tags-grid">
+                            <div class="tag-item">
+                                <span class="tag-key">Infrastructure Domain:</span>
+                                <span class="tag-value text-cyan" id="ext-domain">Rural Connectivity / Culvert</span>
+                            </div>
+                            <div class="tag-item">
+                                <span class="tag-key">Mapped Scheme:</span>
+                                <span class="tag-value text-emerald" id="ext-scheme">PMGSY-IV (All-Weather Roads)</span>
+                            </div>
+                            <div class="tag-item">
+                                <span class="tag-key">Severity Score:</span>
+                                <span class="tag-value text-red" id="ext-severity">High (Health & School Access Blocked)</span>
+                            </div>
+                            <div class="tag-item">
+                                <span class="tag-key">Estimated Beneficiaries:</span>
+                                <span class="tag-value text-violet" id="ext-pop">4,200 Villagers (3 Gram Panchayats)</span>
+                            </div>
+                        </div>
+                        <div class="receipt-footer">
+                            <span>Cryptographic DPG Request Token:</span>
+                            <code class="dpg-token" id="ext-token">JV-2026-MP-49218</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Interactive WhatsApp & Messaging Simulator -->
+                <div class="messaging-simulator glass-panel">
+                    <div class="phone-frame">
+                        <!-- Phone Notch / Status -->
+                        <div class="phone-notch">
+                            <span class="phone-time">9:41 AM</span>
+                            <div class="phone-icons">
+                                <i class="ph-bold ph-cell-signal-full"></i>
+                                <i class="ph-bold ph-wifi-high"></i>
+                                <i class="ph-bold ph-battery-charging"></i>
+                            </div>
+                        </div>
+
+                        <!-- WhatsApp Header -->
+                        <div class="chat-header">
+                            <div class="chat-contact">
+                                <div class="chat-avatar">
+                                    <i class="ph-bold ph-broadcast"></i>
+                                </div>
+                                <div class="chat-meta">
+                                    <span class="chat-name">JanVani National Bot 🇮🇳</span>
+                                    <span class="chat-status"><span class="online-dot"></span> Official Gov DPG Rail</span>
+                                </div>
+                            </div>
+                            <div class="chat-actions">
+                                <i class="ph-bold ph-video-camera"></i>
+                                <i class="ph-bold ph-phone"></i>
+                                <i class="ph-bold ph-dots-three-vertical"></i>
+                            </div>
+                        </div>
+
+                        <!-- Chat Message Body -->
+                        <div class="chat-messages" id="chat-messages-container">
+                            <div class="msg-bubble bot-msg">
+                                <p>🙏 <strong>नमस्ते! JanVani AI में आपका स्वागत है।</strong></p>
+                                <p>आप अपने गाँव या कस्बे की सड़क, पानी, अस्पताल या बिजली की समस्या बोलकर या लिखकर भेज सकते हैं।</p>
+                                <span class="msg-time">09:40 AM <i class="ph-bold ph-checks text-cyan"></i></span>
+                            </div>
+
+                            <div class="msg-bubble user-msg" id="chat-user-msg-bubble">
+                                <div class="voice-note-preview">
+                                    <button class="vn-play-btn" id="btn-chat-vn-play"><i class="ph-fill ph-play"></i></button>
+                                    <div class="vn-wave"></div>
+                                    <span class="vn-duration">0:18</span>
+                                </div>
+                                <p id="chat-user-text">"हमारे गाँव में पीने के पानी का नल ३ महीने से सूखा पड़ा है। हमें ४ किमी दूर जाना पड़ता है।"</p>
+                                <span class="msg-time">09:41 AM</span>
+                            </div>
+
+                            <div class="msg-bubble bot-msg" id="chat-bot-response-bubble">
+                                <p>✅ <strong>शिकायत दर्ज कर ली गई है!</strong></p>
+                                <p>📍 <strong>स्थान:</strong> नंदुरबार, महाराष्ट्र (LGD #27-01)<br>
+                                🚰 <strong>योजना:</strong> जल जीवन मिशन (हर घर जल)<br>
+                                🆔 <strong>टोकन नंबर:</strong> <code>#JV-MH-88201</code></p>
+                                <p class="bot-note">यह डेटा राष्ट्रीय पीएम गति शक्ति और ज़िला योजनाकार डैशबोर्ड में जोड़ दिया गया है।</p>
+                                <span class="msg-time">09:41 AM <i class="ph-bold ph-checks text-cyan"></i></span>
+                            </div>
+                        </div>
+
+                        <!-- Chat Input Box -->
+                        <div class="chat-input-row">
+                            <button class="chat-icon-btn"><i class="ph-bold ph-paperclip"></i></button>
+                            <input type="text" id="chat-input-field" class="chat-input" placeholder="Type complaint or village demand...">
+                            <button class="chat-send-btn" id="btn-chat-send"><i class="ph-bold ph-paper-plane-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: Triple Data Fusion Engine Architecture -->
+    <section class="section-container bg-subtle" id="data-fusion">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-pill badge-violet">MULTI-DATA FUSION PIPELINE</span>
+                <h2 class="section-heading">How JanVani Synthesizes Disparate Datasets</h2>
+                <p class="section-description">
+                    Raw citizen feedback is noisy and fragmented. JanVani fuses bottom-up voice signals with three authoritative national datasets to eliminate bias, detect systemic neglect, and justify public investment.
+                </p>
+            </div>
+
+            <div class="fusion-grid">
+                <!-- Layer 1: Citizen Voices -->
+                <div class="fusion-card glass-panel">
+                    <div class="f-icon-box text-cyan"><i class="ph-duotone ph-megaphone"></i></div>
+                    <div class="f-badge badge-cyan">Layer 1 // Bottom-Up Demand</div>
+                    <h3 class="f-title">Multilingual Citizen Signals</h3>
+                    <p class="f-desc">
+                        Aggregated from WhatsApp IVR, toll-free 1915 helplines, Gram Sabha resolutions, and CPGRAMS grievances. Geotagged to Local Government Directory (LGD) village codes with NLP urgency scoring.
+                    </p>
+                    <ul class="f-metrics-list">
+                        <li><i class="ph-bold ph-check"></i> Dialect Speech-to-Intent (ASR)</li>
+                        <li><i class="ph-bold ph-check"></i> Sentiment & Recurrence Tracking</li>
+                        <li><i class="ph-bold ph-check"></i> Cross-Validation with Neighbouring Villages</li>
+                    </ul>
+                </div>
+
+                <!-- Layer 2: Demographic Vulnerability -->
+                <div class="fusion-card glass-panel">
+                    <div class="f-icon-box text-violet"><i class="ph-duotone ph-users-four"></i></div>
+                    <div class="f-badge badge-violet">Layer 2 // Demographics</div>
+                    <h3 class="f-title">National Demographic Baseline</h3>
+                    <p class="f-desc">
+                        Correlated with 2011/2026 projected Census, Socio-Economic Caste Census (SECC), Aspirational Districts indices, and SC/ST tribal concentration maps to ensure equitable capital distribution.
+                    </p>
+                    <ul class="f-metrics-list">
+                        <li><i class="ph-bold ph-check"></i> NITI Aayog Multidimensional Poverty Index (MPI)</li>
+                        <li><i class="ph-bold ph-check"></i> Vulnerable Demographics (Infant/Maternal Ratios)</li>
+                        <li><i class="ph-bold ph-check"></i> Remote Tribal & Forest Hamlet Weighting</li>
+                    </ul>
+                </div>
+
+                <!-- Layer 3: Infrastructure Indices -->
+                <div class="fusion-card glass-panel">
+                    <div class="f-icon-box text-emerald"><i class="ph-duotone ph-buildings"></i></div>
+                    <div class="f-badge badge-emerald">Layer 3 // Gap Analysis</div>
+                    <h3 class="f-title">National Infrastructure Deficit</h3>
+                    <p class="f-desc">
+                        Live APIs from Jal Jeevan Mission (tap water %), PMGSY (road connectivity %), National Health Systems Resource Centre (PHC beds/10,000), and BharatNet fiber connectivity.
+                    </p>
+                    <ul class="f-metrics-list">
+                        <li><i class="ph-bold ph-check"></i> JJM Tap Water Deficit Index</li>
+                        <li><i class="ph-bold ph-check"></i> PMGSY Habitation Connectivity Gap</li>
+                        <li><i class="ph-bold ph-check"></i> PHC / Sub-Center Emergency Radius Deficit</li>
+                    </ul>
+                </div>
+
+                <!-- Layer 4: Public Investment Plans (PM Gati Shakti) -->
+                <div class="fusion-card glass-panel">
+                    <div class="f-icon-box text-amber"><i class="ph-duotone ph-currency-circle-dollar"></i></div>
+                    <div class="f-badge badge-amber">Layer 4 // Investment Alignment</div>
+                    <h3 class="f-title">Public Outlay & Gati Shakti Master Plan</h3>
+                    <p class="f-desc">
+                        Overlaid against Union Budget Capital Outlay (₹11.11 Lakh Cr), National Infrastructure Pipeline (NIP), State Capital Budgets, and unspent District Mineral Foundation (DMF) funds.
+                    </p>
+                    <ul class="f-metrics-list">
+                        <li><i class="ph-bold ph-check"></i> PM Gati Shakti 44 GIS Data Layers</li>
+                        <li><i class="ph-bold ph-check"></i> Overlapping Works Deduplication (No Repeated Digging)</li>
+                        <li><i class="ph-bold ph-check"></i> District Unspent Fund Optimization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Mathematical Formula Banner -->
+            <div class="formula-banner glass-panel">
+                <div class="formula-header">
+                    <i class="ph-bold ph-function text-cyan"></i>
+                    <h4>JanVani Public Value Index (PVI) Scoring Equation</h4>
+                </div>
+                <div class="formula-code">
+                    <code>PVI = (0.30 × Demand_Intensity) + (0.25 × Vulnerability_Index) + (0.25 × Infrastructure_Deficit) + (0.20 × Economic_Multiplier) - Friction_Penalty</code>
+                </div>
+                <p class="formula-expl">
+                    Guarantees transparent, explainable project prioritization. No arbitrary political favoritism: every high-priority recommendation is mathematically justified by citizen distress, demographic equity, and physical service gaps.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: National Demand Hotspots & Interactive GIS Explorer -->
+    <section class="section-container" id="hotspots-explorer">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-pill badge-emerald">SPATIAL INTELLIGENCE</span>
+                <h2 class="section-heading">National Infrastructure Demand Hotspots</h2>
+                <p class="section-description">
+                    Explore real-time aggregated citizen demand clusters overlaid with demographic vulnerability and physical infrastructure gaps across Indian states and Aspirational Districts.
+                </p>
+            </div>
+
+            <!-- Filters & Map Controls -->
+            <div class="map-controls-bar glass-panel">
+                <div class="filter-group">
+                    <label for="sector-filter"><i class="ph-bold ph-funnel"></i> Sector Filter:</label>
+                    <select id="sector-filter" class="custom-select">
+                        <option value="all">All Infrastructure Sectors</option>
+                        <option value="roads">Rural Roads & Bridges (PMGSY)</option>
+                        <option value="water">Potable Drinking Water (JJM)</option>
+                        <option value="health">Primary Healthcare (Ayushman/PHC)</option>
+                        <option value="education">School Facilities & Labs</option>
+                        <option value="energy">Solar Microgrids & Power</option>
+                        <option value="telecom">BharatNet Fiber & Towers</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="urgency-filter"><i class="ph-bold ph-warning"></i> Demand Intensity:</label>
+                    <select id="urgency-filter" class="custom-select">
+                        <option value="all">All Intensity Levels</option>
+                        <option value="critical">Critical Distress (PVI > 90)</option>
+                        <option value="high">High Priority (PVI 80 - 90)</option>
+                        <option value="moderate">Moderate Demand (PVI < 80)</option>
+                    </select>
+                </div>
+
+                <div class="map-stat-pills">
+                    <span class="stat-pill"><strong id="stat-active-hotspots">12</strong> Active Hotspots</span>
+                    <span class="stat-pill"><strong id="stat-total-demands">1.84M</strong> Citizen Signals</span>
+                </div>
+            </div>
+
+            <!-- Geospatial Cockpit Grid -->
+            <div class="gis-cockpit-grid">
+                <!-- Left: Interactive Spatial Radar Map -->
+                <div class="gis-map-canvas glass-panel" id="map-container">
+                    <div class="map-header-overlay">
+                        <div class="map-legend">
+                            <span class="legend-item"><span class="dot dot-red"></span> Critical Deficit (PVI > 90)</span>
+                            <span class="legend-item"><span class="dot dot-amber"></span> High Demand (PVI 80-90)</span>
+                            <span class="legend-item"><span class="dot dot-cyan"></span> Monitored Cluster</span>
+                            <span class="legend-item"><span class="dot dot-emerald"></span> Project Sanctioned</span>
+                        </div>
+                        <span class="map-mode-badge"><i class="ph-bold ph-satellite"></i> GIS Vector Overlay</span>
+                    </div>
+
+                    <!-- Interactive India SVG Representation -->
+                    <div class="india-map-wrapper" id="india-map-wrapper">
+                        <!-- Stylized SVG Map of India with Interactive Hotspot Nodes -->
+                        <svg viewBox="0 0 800 900" class="india-svg" id="india-svg" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background Grid Lines -->
+                            <defs>
+                                <pattern id="map-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                                </pattern>
+                                <linearGradient id="india-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#0f172a" stop-opacity="0.8"/>
+                                    <stop offset="100%" stop-color="#1e293b" stop-opacity="0.5"/>
+                                </linearGradient>
+                            </defs>
+
+                            <rect width="100%" height="100%" fill="url(#map-grid)" />
+
+                            <!-- India Schematic Simplified Boundary Polygon -->
+                            <path class="india-boundary" d="M 360,60 
+                                     L 410,100 L 440,150 L 490,180 L 530,220 L 590,240 L 640,250 L 710,260 L 730,280 
+                                     L 700,320 L 650,330 L 610,360 L 570,390 L 550,450 L 540,510 L 510,580 L 470,660 
+                                     L 430,750 L 410,820 L 400,840 L 390,820 L 360,750 L 330,680 L 300,600 L 270,520 
+                                     L 240,460 L 200,430 L 170,390 L 190,340 L 240,310 L 280,270 L 310,210 L 340,140 Z" 
+                                  fill="url(#india-grad)" stroke="rgba(6, 182, 212, 0.4)" stroke-width="2" stroke-dasharray="6,4"/>
+
+                            <!-- Northern Boundary Anchor (J&K / Ladakh) -->
+                            <path class="india-region-accent" d="M 340,80 L 400,100 L 420,150 L 360,160 Z" fill="rgba(6,182,212,0.06)" stroke="rgba(6,182,212,0.2)"/>
+                            <!-- Northeast Wing -->
+                            <path class="india-region-accent" d="M 600,240 L 710,250 L 730,290 L 660,330 L 610,310 Z" fill="rgba(139,92,246,0.06)" stroke="rgba(139,92,246,0.2)"/>
+                            <!-- Western Peninsula (Gujarat / Maharashtra) -->
+                            <path class="india-region-accent" d="M 210,360 L 280,340 L 300,430 L 230,440 Z" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.2)"/>
+                            <!-- Southern Tip (TN / Kerala) -->
+                            <path class="india-region-accent" d="M 370,720 L 430,730 L 400,830 Z" fill="rgba(245,158,11,0.06)" stroke="rgba(245,158,11,0.2)"/>
+
+                            <!-- District Hotspot Pin Group (Rendered Dynamically via JS) -->
+                            <g id="hotspot-markers-group"></g>
+                        </svg>
+
+                        <div class="map-interactive-hint">
+                            <i class="ph-bold ph-cursor-click"></i> Click any glowing district node to inspect multi-layer gap diagnostic
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: District Diagnostic Panel -->
+                <div class="district-diagnostic-card glass-panel" id="district-detail-card">
+                    <div class="diag-header">
+                        <div>
+                            <span class="diag-state" id="diag-state-name">ODISHA • EASTERN ZONE</span>
+                            <h3 class="diag-district" id="diag-district-name">Malkangiri District</h3>
+                            <span class="diag-category badge-glass" id="diag-cat-badge">Aspirational District #ASP-OD-04</span>
+                        </div>
+                        <div class="diag-pvi-score">
+                            <span class="score-lbl">Public Value Index</span>
+                            <span class="score-val text-red" id="diag-pvi-value">96.4</span>
+                            <span class="score-sub">Top 1% Critical</span>
+                        </div>
+                    </div>
+
+                    <!-- Key Diagnostic Gauges -->
+                    <div class="diag-metrics-grid">
+                        <div class="d-metric-box">
+                            <span class="dm-label">Citizen Voice Signals</span>
+                            <span class="dm-val text-cyan" id="diag-voices">14,820 Calls</span>
+                            <span class="dm-sub">Top: Bridge over Sileru</span>
+                        </div>
+                        <div class="d-metric-box">
+                            <span class="dm-label">Demographic Vulnerability</span>
+                            <span class="dm-val text-violet" id="diag-vuln">57.4% ST Population</span>
+                            <span class="dm-sub">MPI Poverty: 44.8%</span>
+                        </div>
+                        <div class="d-metric-box">
+                            <span class="dm-label">Infrastructure Deficit</span>
+                            <span class="dm-val text-red" id="diag-deficit">68% Habitations Unpaved</span>
+                            <span class="dm-sub">No all-weather access</span>
+                        </div>
+                        <div class="d-metric-box">
+                            <span class="dm-label">Public Outlay Misalignment</span>
+                            <span class="dm-val text-amber" id="diag-unspent">₹42.6 Cr Unspent</span>
+                            <span class="dm-sub">Idle DMF / State funds</span>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Intervention Callout -->
+                    <div class="diag-rec-box">
+                        <div class="rec-title-row">
+                            <i class="ph-bold ph-sparkle text-cyan"></i>
+                            <strong>AI Recommends High-Priority Project:</strong>
+                        </div>
+                        <h4 class="rec-project-title" id="diag-rec-proj">Sileru River Submersible High-Level Bridge & Bonda Hills Corridor</h4>
+                        <p class="rec-project-desc" id="diag-rec-desc">
+                            Connects 28 cut-off tribal hamlets to Kudumulu PHC and block headquarters. Direct alignment with PMGSY-IV and PM Gati Shakti National Master Plan.
+                        </p>
+                        <div class="rec-meta-tags">
+                            <span class="meta-tag"><i class="ph-bold ph-currency-inr"></i> Est: ₹48.5 Cr</span>
+                            <span class="meta-tag"><i class="ph-bold ph-users"></i> 48,000 Beneficiaries</span>
+                            <span class="meta-tag"><i class="ph-bold ph-clock"></i> 14 Months Execution</span>
+                        </div>
+                    </div>
+
+                    <div class="diag-actions">
+                        <button class="btn btn-primary" id="btn-escalate-project">
+                            <i class="ph-bold ph-paper-plane-tilt"></i> Push to National Priority Queue
+                        </button>
+                        <button class="btn btn-outline" id="btn-export-dossier">
+                            <i class="ph-bold ph-file-pdf"></i> Generate Cabinet Brief
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: AI Project Prioritization & Policymaker Recommendation Cockpit -->
+    <section class="section-container bg-subtle" id="policy-cockpit">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-pill badge-cyan">DECISION INTELLIGENCE</span>
+                <h2 class="section-heading">High-Priority Project Recommendation Cockpit</h2>
+                <p class="section-description">
+                    Empowering Union and State Cabinet Ministers with algorithmically ranked development projects—evaluated against citizen demand urgency, demographic equity, and PM Gati Shakti alignment.
+                </p>
+            </div>
+
+            <!-- Priority Matrix Navigation -->
+            <div class="cockpit-tabs-bar">
+                <button class="c-tab active" data-rank="all">Top National Priorities (All Sectors)</button>
+                <button class="c-tab" data-rank="morth">MoRTH / Rural Connectivity</button>
+                <button class="c-tab" data-rank="jal">Jal Shakti (Potable Water)</button>
+                <button class="c-tab" data-rank="health">Health & Family Welfare (PHC)</button>
+                <button class="c-tab" data-rank="power">New & Renewable Energy</button>
+            </div>
+
+            <!-- Prioritized Project Cards Grid -->
+            <div class="priority-cards-grid" id="priority-projects-container">
+                <!-- Dynamically Populated by app.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Dynamic National Budget Allocation & Optimization Simulator -->
+    <section class="section-container" id="budget-optimizer">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-pill badge-amber">CAPITAL OUTLAY OPTIMIZER</span>
+                <h2 class="section-heading">Knapsack Budget Allocation Simulator</h2>
+                <p class="section-description">
+                    Simulate capital expenditure scenarios. The algorithm computes the Pareto-optimal portfolio of infrastructure projects that maximizes citizen welfare and eliminates regional deficits per crore spent.
+                </p>
+            </div>
+
+            <div class="budget-sim-grid">
+                <!-- Left: Controls -->
+                <div class="budget-controls glass-panel">
+                    <h3 class="panel-subtitle"><i class="ph-bold ph-sliders"></i> Capital Outlay Parameters</h3>
+                    
+                    <!-- Slider: Available Budget Allocation -->
+                    <div class="control-group">
+                        <div class="slider-header">
+                            <label for="slider-budget">Simulated National Budget Pool:</label>
+                            <span class="slider-val text-cyan" id="val-budget-display">₹1,500 Crore</span>
+                        </div>
+                        <input type="range" id="slider-budget" min="200" max="5000" value="1500" step="100" class="custom-slider">
+                        <div class="slider-hints">
+                            <span>₹200 Cr (District Focus)</span>
+                            <span>₹1,500 Cr (State Program)</span>
+                            <span>₹5,000 Cr (National Tranche)</span>
+                        </div>
+                    </div>
+
+                    <!-- Radio / Weight Tuning: Optimization Objective -->
+                    <div class="control-group">
+                        <label class="group-label">Primary Optimization Strategy:</label>
+                        <div class="strategy-options">
+                            <label class="strategy-pill active">
+                                <input type="radio" name="opt-strat" value="balanced" checked>
+                                <span><strong>Max Public Value Index</strong> (Balanced Demand & Equity)</span>
+                            </label>
+                            <label class="strategy-pill">
+                                <input type="radio" name="opt-strat" value="vulnerable">
+                                <span><strong>Tribal & Aspirational Priority</strong> (Focus on MPI & SC/ST)</span>
+                            </label>
+                            <label class="strategy-pill">
+                                <input type="radio" name="opt-strat" value="speed">
+                                <span><strong>Rapid Execution Feasibility</strong> (Sub-12 Month Delivery)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="budget-presets">
+                        <span class="preset-title">Apply Cabinet Tranche:</span>
+                        <div class="preset-buttons">
+                            <button class="btn btn-xs btn-outline" id="btn-preset-aspirational">Aspirational Districts (₹800 Cr)</button>
+                            <button class="btn btn-xs btn-outline" id="btn-preset-tribal">PM-JANMAN Tribal (₹1,500 Cr)</button>
+                            <button class="btn btn-xs btn-outline" id="btn-preset-mega">Union Budget Flagship (₹3,500 Cr)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Simulated Budget Allocation & Impact Metrics -->
+                <div class="budget-results glass-panel">
+                    <h3 class="panel-subtitle"><i class="ph-bold ph-chart-pie-slice"></i> Simulated Optimization Results</h3>
+
+                    <div class="budget-kpi-grid">
+                        <div class="b-kpi-card">
+                            <span class="b-kpi-label">Projects Selected</span>
+                            <span class="b-kpi-num text-cyan" id="opt-projects-count">6 Projects</span>
+                            <span class="b-kpi-sub">Out of 12 candidate dossiers</span>
+                        </div>
+                        <div class="b-kpi-card">
+                            <span class="b-kpi-label">Budget Utilized</span>
+                            <span class="b-kpi-num text-emerald" id="opt-budget-spent">₹1,442.5 Cr</span>
+                            <span class="b-kpi-sub" id="opt-budget-left">₹57.5 Cr unallocated buffer</span>
+                        </div>
+                        <div class="b-kpi-card">
+                            <span class="b-kpi-label">Citizens Impacted</span>
+                            <span class="b-kpi-num text-violet" id="opt-citizen-reach">4.28 Million</span>
+                            <span class="b-kpi-sub">Across 9 Aspirational Districts</span>
+                        </div>
+                        <div class="b-kpi-card">
+                            <span class="b-kpi-label">Average PVI Efficiency</span>
+                            <span class="b-kpi-num text-amber" id="opt-efficiency-score">92.8 / 100</span>
+                            <span class="b-kpi-sub">High return on public capital</span>
+                        </div>
+                    </div>
+
+                    <!-- Selected Projects Miniature List -->
+                    <div class="selected-projects-box">
+                        <div class="sel-box-head">
+                            <span><i class="ph-bold ph-list-checks text-emerald"></i> Algorithmic Project Allocation Bundle:</span>
+                            <span class="sel-badge" id="bundle-tag">Pareto Optimal Frontier</span>
+                        </div>
+                        <div class="selected-items-list" id="selected-projects-list">
+                            <!-- Populated dynamically via app.js -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: DPI Impact Measurement & Closed-Loop Citizen Feedback -->
+    <section class="section-container bg-subtle" id="impact-metrics">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-pill badge-violet">CLOSED-LOOP TRANSPARENCY</span>
+                <h2 class="section-heading">Measuring Long-Term DPI Impact & Public Accountability</h2>
+                <p class="section-description">
+                    JanVani doesn't stop at sanctioning projects. The platform tracks post-completion outcomes through automated WhatsApp re-surveys, satellite verification, and a verifiable public expenditure ledger.
+                </p>
+            </div>
+
+            <div class="impact-cards-grid">
+                <div class="impact-card glass-panel">
+                    <div class="imp-icon text-cyan"><i class="ph-duotone ph-clock-counter-clockwise"></i></div>
+                    <span class="imp-badge badge-cyan">Before vs After</span>
+                    <h3 class="imp-title">Average Hospital Commute Time</h3>
+                    <div class="imp-stat-row">
+                        <span class="stat-old">Before: 3.4 Hours</span>
+                        <i class="ph-bold ph-arrow-right text-cyan"></i>
+                        <span class="stat-new text-emerald">After: 28 Minutes</span>
+                    </div>
+                    <p class="imp-desc">
+                        Post-completion of high-level culvert in Shahgarh, MP. Ambulances now operate 24/7 during monsoons, reducing maternal emergency mortality to zero.
+                    </p>
+                </div>
+
+                <div class="impact-card glass-panel">
+                    <div class="imp-icon text-emerald"><i class="ph-duotone ph-drop"></i></div>
+                    <span class="imp-badge badge-emerald">Health Outcome</span>
+                    <h3 class="imp-title">Waterborne Illness Incidence</h3>
+                    <div class="imp-stat-row">
+                        <span class="stat-old">Before: 34.2%</span>
+                        <i class="ph-bold ph-arrow-right text-emerald"></i>
+                        <span class="stat-new text-emerald">After: 4.8%</span>
+                    </div>
+                    <p class="imp-desc">
+                        Following rapid sanction of solar RO filtration plants in Nandurbar, Maharashtra. Surveyed via automated IVR in Bhilori dialect.
+                    </p>
+                </div>
+
+                <div class="impact-card glass-panel">
+                    <div class="imp-icon text-violet"><i class="ph-duotone ph-currency-circle-dollar"></i></div>
+                    <span class="imp-badge badge-violet">Fiscal Efficiency</span>
+                    <h3 class="imp-title">Public Spending Misalignment</h3>
+                    <div class="imp-stat-row">
+                        <span class="stat-old">Before: 42% Unaligned</span>
+                        <i class="ph-bold ph-arrow-right text-violet"></i>
+                        <span class="stat-new text-emerald">After: &lt; 6% Discrepancy</span>
+                    </div>
+                    <p class="imp-desc">
+                        Capital expenditure correlated with empirical citizen demand clusters rather than subjective contractor lobbying.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Citizen Tracking Lookup Widget -->
+            <div class="tracking-lookup-box glass-panel text-center">
+                <h3 class="lookup-heading"><i class="ph-bold ph-magnifying-glass"></i> Track a Citizen Development Request</h3>
+                <p class="lookup-sub">Enter any JanVani token (e.g., <code>JV-2026-MP-49218</code> or <code>JV-2026-OD-99201</code>) to inspect live progress, sanction status, and ministry allocation.</p>
+                <div class="lookup-form-row">
+                    <input type="text" id="input-token-search" class="lookup-input" placeholder="Enter Token ID (e.g. JV-2026-MP-49218)">
+                    <button class="btn btn-primary" id="btn-search-token">Check Status</button>
+                </div>
+                <div class="token-result-display hidden" id="token-result-box">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: Digital Public Good (DPG) Specifications & Open Standards -->
+    <section class="section-container" id="dpg-specs">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-pill badge-amber">DPG OPEN ARCHITECTURE</span>
+                <h2 class="section-heading">Engineered as an Open Digital Public Good</h2>
+                <p class="section-description">
+                    JanVani AI complies with the 9 Digital Public Goods Alliance (DPGA) standards. Open-source code, open APIs, Beckn protocol integration, and zero proprietary vendor lock-in.
+                </p>
+            </div>
+
+            <div class="dpg-grid">
+                <div class="dpg-card glass-panel">
+                    <div class="dpg-icon text-cyan"><i class="ph-duotone ph-git-branch"></i></div>
+                    <span class="dpg-badge badge-cyan">Open Protocol</span>
+                    <h3 class="dpg-title">Beckn Protocol for Public Infrastructure</h3>
+                    <p class="dpg-text">
+                        Standardized JSON schemas for citizen infrastructure tenders, grievance discovery, and inter-agency work order routing across MoRTH, Jal Shakti, and MoHFW.
+                    </p>
+                    <div class="dpg-code-preview">
+                        <code>POST /beckn/v2/infra/demand { "domain": "nic:rural_roads", "lgd": 4921, "pvi": 96.4 }</code>
+                    </div>
+                </div>
+
+                <div class="dpg-card glass-panel">
+                    <div class="dpg-icon text-violet"><i class="ph-duotone ph-translate"></i></div>
+                    <span class="dpg-badge badge-violet">Language AI</span>
+                    <h3 class="dpg-title">Bhashini Open Model Integration</h3>
+                    <p class="dpg-text">
+                        Self-hosted speech recognition (ASR) and text-to-speech (TTS) models fine-tuned on 22 Indian languages. Models run on sovereign cloud infrastructure with zero foreign server egress.
+                    </p>
+                    <div class="dpg-code-preview">
+                        <code>curl -X POST api.bhashini.gov.in/v1/asr -d '{ "source": "bhojpuri", "audio": "base64" }'</code>
+                    </div>
+                </div>
+
+                <div class="dpg-card glass-panel">
+                    <div class="dpg-icon text-emerald"><i class="ph-duotone ph-shield-check"></i></div>
+                    <span class="dpg-badge badge-emerald">Privacy First</span>
+                    <h3 class="dpg-title">DEPA & Privacy-Preserving Analytics</h3>
+                    <p class="dpg-text">
+                        Zero citizen PII stored. Personal identities are pseudonymized at the edge via Aadhaar/ABHA zero-knowledge tokens. Aggregated demand indices use Differential Privacy (&epsilon; = 0.5).
+                    </p>
+                    <div class="dpg-code-preview">
+                        <code>zkp.verifyProof(proof, { minAge: 18, residentState: "OD" }) -> true (0 PII exposed)</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: Call to Action for Policymakers -->
+    <section class="cta-banner-section">
+        <div class="container">
+            <div class="cta-box glass-panel text-center">
+                <span class="badge-live"><span class="pulse-dot"></span> OPEN FOR DEPLOYMENT</span>
+                <h2 class="cta-heading">Empower Your State or District with JanVani AI</h2>
+                <p class="cta-text">
+                    Join NITI Aayog, Ministry of Rural Development, and State Planning Boards in operationalizing citizen-centric infrastructure prioritization. Open source, sovereign, and population-scale.
+                </p>
+                <div class="cta-form-container">
+                    <form class="cta-form" id="consultation-form">
+                        <input type="email" placeholder="Enter official email (.gov.in / .nic.in / institution)" required class="cta-input" id="consult-email">
+                        <button type="submit" class="btn btn-primary shadow-glow">Request Pilot Deployment</button>
+                    </form>
+                    <div class="form-disclaimer">Zero spam. Digital Public Good open-source codebase & deployment documentation.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col-main">
+                <div class="brand-logo mb-3">
+                    <div class="brand-icon"><i class="ph-duotone ph-broadcast"></i></div>
+                    <div class="brand-text">
+                        <span class="brand-title">JanVani<span class="brand-accent">.AI</span></span>
+                        <span class="brand-subtitle">Infra Demand Intelligence // भारत DPI</span>
+                    </div>
+                </div>
+                <p class="footer-desc">
+                    A Digital Public Good dedicated to closing India's infrastructure deficit by democratizing development planning. Transforming 1.4 billion citizen voices into actionable, high-ROI public capital investments.
+                </p>
+                <div class="footer-social-links">
+                    <a href="https://github.com/shantanusharma-22" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub (@shantanusharma-22)"><i class="ph-bold ph-github-logo"></i></a>
+                    <a href="https://www.linkedin.com/in/shantanu-sharma-475891379" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn (@shantanu-sharma)"><i class="ph-bold ph-linkedin-logo"></i></a>
+                    <a href="https://github.com/shantanusharma-22" target="_blank" rel="noopener noreferrer" class="social-link" title="Open DPI Repositories"><i class="ph-bold ph-git-pull-request"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-col-title">Core DPI Rails</h4>
+                <ul class="footer-links">
+                    <li><a href="#ingestion-hub">Bhashini Multilingual Speech</a></li>
+                    <li><a href="#data-fusion">PM Gati Shakti Master Plan</a></li>
+                    <li><a href="#data-fusion">Local Government Directory (LGD)</a></li>
+                    <li><a href="#dpg-specs">Beckn Protocol for Public Works</a></li>
+                    <li><a href="#dpg-specs">DEPA Consent & Differential Privacy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-col-title">Government Portals</h4>
+                <ul class="footer-links">
+                    <li><a href="#hotspots-explorer">NITI Aayog Aspirational Districts</a></li>
+                    <li><a href="#policy-cockpit">Pradhan Mantri Gram Sadak Yojana</a></li>
+                    <li><a href="#policy-cockpit">Jal Jeevan Mission Dashboard</a></li>
+                    <li><a href="#policy-cockpit">National Infrastructure Pipeline (NIP)</a></li>
+                    <li><a href="#budget-optimizer">District Mineral Foundation (DMF)</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-col-title">Open Standards</h4>
+                <ul class="footer-links">
+                    <li><a href="#dpg-specs">Digital Public Goods Alliance (DPGA)</a></li>
+                    <li><a href="#dpg-specs">Open API Specification v3.1</a></li>
+                    <li><a href="#dpg-specs">Algorithmic Explainability Specs</a></li>
+                    <li><a href="#dpg-specs">Citizen Privacy Charter</a></li>
+                    <li><a href="#dpg-specs">Source Code Repository</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <div class="copyright-text">
+                &copy; 2026 JanVani AI Working Group // National Digital Public Good. Released under MIT Open Infrastructure License.
+            </div>
+            <div class="footer-meta-links">
+                <a href="#">Privacy Architecture</a>
+                <a href="#">Algorithmic Transparency</a>
+                <a href="#">Security Safeguards</a>
+                <a href="#">Terms of Open Protocol</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Request Status Modal -->
+    <div class="modal-backdrop hidden" id="status-modal">
+        <div class="modal-card glass-panel">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <span class="badge-live"><span class="pulse-dot"></span> CITIZEN TRACKING PORTAL</span>
+                    <h3 class="modal-title" id="modal-token-title">Request #JV-2026-MP-49218</h3>
+                </div>
+                <button class="modal-close" id="modal-status-close-btn"><i class="ph-bold ph-x"></i></button>
+            </div>
+            <div class="modal-body" id="modal-token-body">
+                <!-- Injected via JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="btn-modal-close">Close</button>
+                <button class="btn btn-primary" id="btn-modal-share"><i class="ph-bold ph-share-network"></i> Share Live Status</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
